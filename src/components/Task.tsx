@@ -4,18 +4,23 @@ import styles from "./Task.module.css";
 
 interface Props {
   task: ITask;
+  onDelete: (value: string) => void;
 }
 
-export const Task = ({ task }: Props) => (
-  <div className={styles.task}>
-    <button className={styles.check}>
-      <div></div>
-    </button>
+export const Task = ({ task, onDelete }: Props) => {
+  const handleDelete = (id: string) => onDelete(id);
 
-    <p>{task.title}</p>
+  return (
+    <div className={styles.task}>
+      <button className={styles.check}>
+        <div></div>
+      </button>
 
-    <button className={styles.delete}>
-      <Trash size={24} />
-    </button>
-  </div>
-);
+      <p>{task.title}</p>
+
+      <button className={styles.delete} onClick={() => handleDelete(task.id)}>
+        <Trash size={24} />
+      </button>
+    </div>
+  );
+};
