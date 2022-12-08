@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Header, ListTasks } from "./components";
 
 export interface ITask {
@@ -10,17 +10,25 @@ export interface ITask {
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
-  const addTask = (title: string) => {
+  const addTask = useCallback((title: string) => {
     const id = crypto.randomUUID();
     const newTask = { id, title, isCompleted: false };
     setTasks((prev) => [...prev, newTask]);
-  };
+  }, []);
+
+  const deleteTaskById = useCallback(
+    (taskId: string) => {
+      const newTasks = tasks.filter(({ id }) => id !== taskId);
+      setTasks(newTasks);
+    },
+    [tasks]
+  );
 
   return (
     <>
       <Header onAddTask={addTask} />
 
-      <ListTasks tasks={tasks} />
+      <ListTasks tasks={tasks} onDelete={deleteTaskById} />
     </>
   );
 }
