@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Header, ListTasks } from "./components";
 
 export interface ITask {
@@ -7,6 +8,8 @@ export interface ITask {
 }
 
 function App() {
+  const [tasks, setTasks] = useState<ITask[]>([]);
+
   return (
     <>
       <Header />
