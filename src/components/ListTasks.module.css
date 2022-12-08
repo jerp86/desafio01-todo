@@ -36,3 +36,9 @@
   font-size: var(--sm);
   font-weight: 700;
 }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}

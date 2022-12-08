@@ -1,4 +1,5 @@
 import styles from "./ListTasks.module.css";
+import { Task } from "./Task";
 
 export const ListTasks = () => (
   <section className={styles.tasks}>
@@ -14,6 +15,9 @@ export const ListTasks = () => (
       </div>
     </header>
 
-    <div></div>
+    <div className={styles.list}>
+      <Task />
+      <Task />
+    </div>
   </section>
 );
