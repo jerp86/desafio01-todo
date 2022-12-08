@@ -14,7 +14,7 @@ function App() {
     <>
       <Header />
 
-      <ListTasks />
+      <ListTasks tasks={tasks} />
     </>
   );
 }
