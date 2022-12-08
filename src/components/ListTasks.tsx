@@ -1,23 +1,34 @@
+import { ITask } from "../App";
 import styles from "./ListTasks.module.css";
 import { Task } from "./Task";
 
-export const ListTasks = () => (
-  <section className={styles.tasks}>
-    <header className={styles.header}>
-      <div>
-        <p>Tarefas criadas</p>
-        <span>0</span>
-      </div>
+interface Props {
+  tasks: ITask[];
+}
 
-      <div>
-        <p className={styles.textPurple}>Concluídas</p>
-        <span>0</span>
-      </div>
-    </header>
+export const ListTasks = ({ tasks }: Props) => {
+  const taskQuantity = tasks.length;
+  const completedTasks = tasks.filter(({ isCompleted }) => isCompleted).length;
 
-    <div className={styles.list}>
-      <Task />
-      <Task />
-    </div>
-  </section>
-);
+  return (
+    <section className={styles.tasks}>
+      <header className={styles.header}>
+        <div>
+          <p>Tarefas criadas</p>
+          <span>{taskQuantity}</span>
+        </div>
+
+        <div>
+          <p className={styles.textPurple}>Concluídas</p>
+          <span>{`${completedTasks} de ${taskQuantity}`}</span>
+        </div>
+      </header>
+
+      <div className={styles.list}>
+        {tasks.map((task) => (
+          <Task key={task.id} task={task} />
+        ))}
+      </div>
+    </section>
+  );
+};
