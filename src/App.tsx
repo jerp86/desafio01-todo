@@ -1,5 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Header, ListTasks } from "./components";
+
+const LOCAL_STORAGE_KEY = "todo:tasksSaved";
 
 export interface ITask {
   id: string;
@@ -10,16 +12,27 @@ export interface ITask {
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
-  const addTask = useCallback((title: string) => {
-    const id = crypto.randomUUID();
-    const newTask = { id, title, isCompleted: false };
-    setTasks((prev) => [...prev, newTask]);
-  }, []);
+  const setTasksAndSave = (newTasks: ITask[]) => {
+    console.log("setTasksAndSave", newTasks);
+
+    setTasks(newTasks);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
+  };
+
+  const addTask = useCallback(
+    (title: string) => {
+      const id = crypto.randomUUID();
+      const newTasks: ITask[] = [...tasks, { id, title, isCompleted: false }];
+      console.log("addTask", title, newTasks);
+      setTasksAndSave(newTasks);
+    },
+    [tasks]
+  );
 
   const deleteTaskById = useCallback(
     (taskId: string) => {
       const newTasks = tasks.filter(({ id }) => id !== taskId);
-      setTasks(newTasks);
+      setTasksAndSave(newTasks);
     },
     [tasks]
   );
@@ -29,10 +42,18 @@ function App() {
       const newTasks = tasks.map((task) =>
         task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
       );
-      setTasks(newTasks);
+      setTasksAndSave(newTasks);
     },
     [tasks]
   );
+
+  useEffect(() => {
+    const tasksSaved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (!tasksSaved) return;
+
+    const parsedValues = JSON.parse(tasksSaved);
+    setTasks(parsedValues);
+  }, []);
 
   return (
     <>
