@@ -42,3 +42,29 @@
   flex-direction: column;
   gap: 1.2rem;
 }
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6.4rem 2.4rem;
+  gap: 1.6rem;
+  border-top: 1px solid var(--gray-400);
+  border-radius: 0.8rem;
+}
+
+.empty svg {
+  opacity: 0.3;
+}
+
+.empty p,
+.empty span {
+  color: var(--gray-300);
+  text-align: center;
+  font-size: var(--lg);
+}
+
+.empty p {
+  font-weight: 700;
+}
