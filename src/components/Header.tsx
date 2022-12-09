@@ -37,7 +37,7 @@ export const Header = ({ onAddTask }: Props) => {
         />
         <button type="submit">
           Criar
-          <PlusCircle size={16} />
+          <PlusCircle size={16} weight="bold" />
         </button>
       </form>
     </header>
