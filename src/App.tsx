@@ -24,11 +24,21 @@ function App() {
     [tasks]
   );
 
+  const checkById = useCallback(
+    (taskId: string) => {
+      const newTasks = tasks.map((task) =>
+        task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
+      );
+      setTasks(newTasks);
+    },
+    [tasks]
+  );
+
   return (
     <>
       <Header onAddTask={addTask} />
 
-      <ListTasks tasks={tasks} onDelete={deleteTaskById} />
+      <ListTasks tasks={tasks} onDelete={deleteTaskById} onCheck={checkById} />
     </>
   );
 }
