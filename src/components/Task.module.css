@@ -51,6 +51,16 @@
   opacity: 0.8;
 }
 
+.check svg {
+  color: var(--purple-dark);
+  opacity: 0.9;
+  transition: color 0.27s;
+}
+
+.check svg:hover {
+  color: var(--purple);
+}
+
 .delete {
   background: none;
   border: none;

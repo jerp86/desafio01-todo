@@ -18,7 +18,7 @@ export const Task = ({ task, onCheck, onDelete }: Props) => {
     <div className={styles.task}>
       <button className={styles.check} onClick={handleCheck}>
         {task.isCompleted ? (
-          <CheckCircle size={24} color="#5e60ce" weight="fill" />
+          <CheckCircle size={24} weight="fill" />
         ) : (
           <div></div>
         )}
