@@ -49,10 +49,9 @@ function App() {
 
   useEffect(() => {
     const tasksSaved = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (!tasksSaved) return;
-
-    const parsedValues = JSON.parse(tasksSaved);
-    setTasks(parsedValues);
+    if (tasksSaved) {
+      setTasks(JSON.parse(tasksSaved));
+    }
   }, []);
 
   return (
