@@ -4,10 +4,11 @@ import { Task } from "./Task";
 
 interface Props {
   tasks: ITask[];
+  onCheck: (value: string) => void;
   onDelete: (value: string) => void;
 }
 
-export const ListTasks = ({ tasks, onDelete }: Props) => {
+export const ListTasks = ({ tasks, onCheck, onDelete }: Props) => {
   const taskQuantity = tasks.length;
   const completedTasks = tasks.filter(({ isCompleted }) => isCompleted).length;
 
@@ -27,7 +28,12 @@ export const ListTasks = ({ tasks, onDelete }: Props) => {
 
       <div className={styles.list}>
         {tasks.map((task) => (
-          <Task key={task.id} task={task} onDelete={onDelete} />
+          <Task
+            key={task.id}
+            task={task}
+            onDelete={onDelete}
+            onCheck={onCheck}
+          />
         ))}
       </div>
     </section>
